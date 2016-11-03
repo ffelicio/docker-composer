@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+  nginx:
+    image: marcospaegle/nginx:1.11.5-v1.0
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - appnet
+  php:
+    image: marcospaegle/php:7.0.12-v1.0
+    volumes:
+      - .:/var/www/html
+    networks:
+      - appnet
+  mysql:
+    image: mysql:5.7.16
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+    volumes:
+      - data:/var/lib/mysql
+    networks:
+      - appnet
+
+networks:
+  appnet:
+    driver: "bridge"
+    
+volumes:
+  data:
+    driver: "local"
