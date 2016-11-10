@@ -19,6 +19,7 @@ services:
       - appnet
   node:
     image: marcospaegle/node:6.9.1-v1.0
+    container_name: node
     networks:
       - appnet
   mysql:
